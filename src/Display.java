@@ -6,7 +6,7 @@ public class Display extends JFrame {
    private  Canvas canvas;
 
    public Display( int width , int height ){
-       setTitle("Virus Vanguard");
+       setTitle("Safu");
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setResizable(false);
 
