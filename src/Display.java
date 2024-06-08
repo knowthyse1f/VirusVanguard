@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
 
    private  Canvas canvas;
 
    public Display( int width , int height ){
-       setTitle("Safu");
+       setTitle("Virus Vanguard");
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setResizable(false);
 
@@ -16,8 +17,19 @@ public class Display extends JFrame {
        add(canvas);
        pack();
 
+       canvas.createBufferStrategy(3);
        setLocationRelativeTo(null);
        setVisible(true);
+   }
+   public void render (Game game){
+       BufferStrategy bufferStrategy =canvas.getBufferStrategy();
+       Graphics graphics=bufferStrategy.getDrawGraphics();
+
+       graphics.setColor(Color.BLACK);
+       graphics.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+
+       graphics.dispose();
+       bufferStrategy.show();
    }
 
 }
