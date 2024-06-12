@@ -18,5 +18,6 @@ public class Squre extends GameObject{
 
         graphics.dispose();
         return image;
+
     }
 }
