@@ -20,14 +20,18 @@ public class Display extends JFrame {
        canvas.createBufferStrategy(3);
        setLocationRelativeTo(null);
        setVisible(true);
+
+       canvas.createBufferStrategy(3);
    }
    public void render (Game game){
        BufferStrategy bufferStrategy =canvas.getBufferStrategy();
        Graphics graphics=bufferStrategy.getDrawGraphics();
 
+       //clear screen
        graphics.setColor(Color.BLACK);
        graphics.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
 
+       //Draw Ractangle
        Rectangle rectangle=game.getRectangle();
        graphics.setColor(Color.BLUE);
        graphics.fillRect(

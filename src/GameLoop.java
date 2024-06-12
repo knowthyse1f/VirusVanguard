@@ -4,6 +4,7 @@ public class GameLoop implements  Runnable{
 
     private boolean running;
     private final double updateRate=1.0d/60.0d;
+    private final long updateRateInNanos=(long)(updateRate*1e9);
 
     private long nextStartTime;
     private int fps,ups;
@@ -15,20 +16,21 @@ public class GameLoop implements  Runnable{
     public void run() {
         running=true;
         double accumulator =0;
-        long currentTime, lastUpdate= System.currentTimeMillis();
+        long currentTime, lastUpdate= System.nanoTime();
         nextStartTime=System.currentTimeMillis()+1000;
 
 
         while(running){
-            currentTime=System.currentTimeMillis();
-            double lastRenderTimeInSecond=(currentTime-lastUpdate);
-            accumulator+=lastRenderTimeInSecond;
+            currentTime=System.nanoTime();
+            long elapsedTime= currentTime-lastUpdate;
+            accumulator+=elapsedTime;
             lastUpdate=currentTime;
 
-            while(accumulator>updateRate){
+            while(accumulator>=updateRateInNanos){
                 update();
-                accumulator-=updateRate;
+                accumulator-=updateRateInNanos;
             }
+
                 render();
             printStates();
         }

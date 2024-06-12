@@ -8,7 +8,7 @@ public class Game {
         rectangle=new Rectangle(0,0,50,50);
     }
     public void update(){
-
+    rectangle.setLocation((int)rectangle.getX()+1,(int)rectangle.getY());
     }
     public void render(){
         display.render(this);
