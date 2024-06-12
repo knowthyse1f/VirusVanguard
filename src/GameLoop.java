@@ -26,12 +26,14 @@ public class GameLoop implements  Runnable{
             accumulator+=elapsedTime;
             lastUpdate=currentTime;
 
-            while(accumulator>=updateRateInNanos){
-                update();
-                accumulator-=updateRateInNanos;
-            }
+            if(accumulator>=updateRateInNanos) {
+                while (accumulator >= updateRateInNanos) {
+                    update();
+                    accumulator -= updateRateInNanos;
+                }
 
                 render();
+            }
             printStates();
         }
     }
