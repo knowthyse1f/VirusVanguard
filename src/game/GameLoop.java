@@ -1,3 +1,7 @@
+package game;
+
+import game.Game;
+
 public class GameLoop implements  Runnable{
 
     private Game game;
