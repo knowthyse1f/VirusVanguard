@@ -15,7 +15,7 @@ public class Game {
     public Game(int width , int height){
 
         input=new Input();
-        display= new Display(width, height);
+        display= new Display(width, height,input);
         gameObjects=new ArrayList<>();
         gameObjects.add(new Player(new PlayerController(input)));
     }

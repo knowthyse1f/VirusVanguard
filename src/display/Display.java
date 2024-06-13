@@ -1,6 +1,7 @@
 package display;
 
 import game.Game;
+import input.Input;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,8 @@ public class Display extends JFrame {
    private  Canvas canvas;
    private Renderer renderer;
 
-   public Display( int width , int height ){
+
+    public Display( int width , int height,Input input ){
        setTitle("Virus Vanguard");
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setResizable(false);
@@ -23,7 +25,6 @@ public class Display extends JFrame {
        canvas.setPreferredSize(new Dimension(width, height));
        canvas.setFocusable(false);
        add(canvas);
-       KeyListener input = null;
        addKeyListener(input);
        pack();
 
@@ -47,5 +48,7 @@ public class Display extends JFrame {
        graphics.dispose();
        bufferStrategy.show();
    }
+
+
 
 }
