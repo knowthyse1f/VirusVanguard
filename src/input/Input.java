@@ -5,7 +5,6 @@ import java.awt.event.KeyListener;
 
 public class Input implements KeyListener {
     private boolean[] pressed;
-
     public Input(){
         pressed= new boolean[256];
     }
