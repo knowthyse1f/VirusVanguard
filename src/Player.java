@@ -1,7 +1,9 @@
+import entity.GameObject;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class Player extends GameObject{
+public class Player extends GameObject {
 
     private Controller controller;
 

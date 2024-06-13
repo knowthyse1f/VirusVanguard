@@ -1,7 +1,6 @@
 package display;
 
 import game.Game;
-import input.Input;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ public class Display extends JFrame {
    private  Canvas canvas;
    private Renderer renderer;
 
-   public Display( int width , int height, Input input ){
+   public Display( int width , int height ){
        setTitle("Virus Vanguard");
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setResizable(false);
