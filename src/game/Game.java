@@ -1,6 +1,7 @@
 package game;
 import display.Display;
 import entity.GameObject;
+import entity.Player;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ public class Game {
     public Game(int width , int height){
         display= new Display(width, height);
         gameObjects=new ArrayList<>();
-        gameObjects.add(new ());
+        //gameObjects.add(new Player());
     }
     public void update(){
     gameObjects.forEach(gameObject -> gameObject.update());
