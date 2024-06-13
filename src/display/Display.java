@@ -13,8 +13,7 @@ public class Display extends JFrame {
    private  Canvas canvas;
    private Renderer renderer;
 
-
-    public Display( int width , int height,Input input ){
+   public Display( int width , int height , Input input ){
        setTitle("Virus Vanguard");
        setDefaultCloseOperation(EXIT_ON_CLOSE);
        setResizable(false);
@@ -25,6 +24,7 @@ public class Display extends JFrame {
        canvas.setPreferredSize(new Dimension(width, height));
        canvas.setFocusable(false);
        add(canvas);
+
        addKeyListener(input);
        pack();
 
@@ -48,7 +48,5 @@ public class Display extends JFrame {
        graphics.dispose();
        bufferStrategy.show();
    }
-
-
 
 }
