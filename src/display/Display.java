@@ -4,6 +4,7 @@ import game.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
@@ -22,6 +23,7 @@ public class Display extends JFrame {
        canvas.setPreferredSize(new Dimension(width, height));
        canvas.setFocusable(false);
        add(canvas);
+       KeyListener input = null;
        addKeyListener(input);
        pack();
 

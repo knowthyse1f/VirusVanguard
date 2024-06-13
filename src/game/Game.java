@@ -12,7 +12,7 @@ public class Game {
     public Game(int width , int height){
         display= new Display(width, height);
         gameObjects=new ArrayList<>();
-        gameObjects.add(new Squre());
+        gameObjects.add(new ());
     }
     public void update(){
     gameObjects.forEach(gameObject -> gameObject.update());
