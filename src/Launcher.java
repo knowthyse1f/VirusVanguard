@@ -6,3 +6,4 @@ public class Launcher {
         new Thread(new GameLoop(new Game(800,600))).start();
     }
 }
+//testing
