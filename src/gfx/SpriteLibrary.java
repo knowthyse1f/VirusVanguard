@@ -52,4 +52,8 @@ public class SpriteLibrary {
         File baseFolder = new File(resource.getFile());
         return baseFolder.list((current, name) -> new File(current, name).isDirectory());
     }
+
+    public SpriteSet getUnit(String name) {
+        return units.get(name);
+    }
 }

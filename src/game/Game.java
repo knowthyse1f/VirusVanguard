@@ -10,6 +10,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 public class Game {
+    public static int SPRITE_SIZE=64;
+
     private Display display;
     private List<GameObject> gameObjects;
     private Input input;
@@ -19,9 +21,10 @@ public class Game {
 
         input=new Input();
         display= new Display(width, height,input);
-        gameObjects=new ArrayList<>();
-        gameObjects.add(new Player(new PlayerController(input)));
         spriteLibrary= new SpriteLibrary();
+        gameObjects=new ArrayList<>();
+        gameObjects.add(new Player(new PlayerController(input),spriteLibrary));
+
     }
     public void update(){
     gameObjects.forEach(gameObject -> gameObject.update());
