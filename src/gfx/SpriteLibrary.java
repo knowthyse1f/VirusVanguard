@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SpriteLibrary {
-    private static final String PATH_TO_UNITS = "/sprites/units/";
     private Map<String, SpriteSet> units;
     private Map<String, Image>tiles;
 
@@ -21,12 +20,12 @@ public class SpriteLibrary {
     }
 
     private void loadSpritesFromDisk() {
-        loadUnits();
-        loadTiles();
+        loadUnits("/sprites/units");
+        loadTiles("/sprites/units");
 
     }
 
-    private void loadTiles() {
+    private void loadTiles(String path) {
         BufferedImage image= new BufferedImage(Game.SPRITE_SIZE,Game.SPRITE_SIZE,BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics=image.createGraphics();
         graphics.setColor(Color.red);
@@ -36,14 +35,14 @@ public class SpriteLibrary {
         tiles.put("default",image);
     }
 
-    private void loadUnits()
+    private void loadUnits(String path)
     {
-        String[] folderNames = getFolderNames(PATH_TO_UNITS);
+        String[] folderNames = getFolderNames(path);
 
         if (folderNames != null) {
             for (String folderName : folderNames) {
                 SpriteSet spriteSet = new SpriteSet();
-                String pathToFolder = PATH_TO_UNITS + folderName;
+                String pathToFolder = path+"/" + folderName;
                 String[] sheetsInFolder = getSheetsInFolder(pathToFolder);
 
                 if (sheetsInFolder != null) {
