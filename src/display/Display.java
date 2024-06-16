@@ -1,12 +1,11 @@
 package display;
 
-import game.Game;
+
 import game.state.State;
 import input.Input;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 public class Display extends JFrame {
@@ -29,7 +28,7 @@ public class Display extends JFrame {
        addKeyListener(input);
        pack();
 
-       canvas.createBufferStrategy(3);
+       canvas.createBufferStrategy(2);
        setLocationRelativeTo(null);
        setVisible(true);
 

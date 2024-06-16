@@ -22,7 +22,7 @@ public class GameState extends State{
         gameObjects.add(player);
         camera.focusOn(player);
 
-        initializeNPCs(100);
+        initializeNPCs(200);
     }
 
     private void initializeNPCs(int numberOfNPCs) {
