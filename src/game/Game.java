@@ -1,18 +1,11 @@
 package game;
-import controller.PlayerController;
 import core.Size;
 import display.Display;
-import entity.GameObject;
-import entity.Player;
 import game.state.GameState;
 import game.state.State;
-import gfx.SpriteLibrary;
 import input.Input;
 
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 public class Game {
     public static int SPRITE_SIZE=64;
 

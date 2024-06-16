@@ -22,10 +22,10 @@ public class AiManager {
     }
 
     private void transitionTo(String nextState) {
-        System.out.println("Transition to "+nextState);
         switch (nextState){
             case "wander":
                 currentAiState= new Wander();
+                break;
             case "stand":
             default:
                 currentAiState= new Stand();

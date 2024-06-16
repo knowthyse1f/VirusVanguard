@@ -12,7 +12,7 @@ public abstract class AiState {
     }
 
     protected abstract AiTransition initializeTransition();
-    public abstract void update (State state, NPC currentCharecter);
+    public abstract void update (State state, NPC currentCharacter);
     public boolean shouldTransition(State state, NPC currentCharecter){
         return transition.shouldTransition(state,currentCharecter);
     }

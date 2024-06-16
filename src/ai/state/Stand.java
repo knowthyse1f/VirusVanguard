@@ -8,7 +8,7 @@ public class Stand extends AiState{
     private  int updatesAlive;
     @Override
     protected AiTransition initializeTransition() {
-        return new AiTransition("stand",((state, currentCharecter) -> updatesAlive>=state.getTime().getUpdatesFromSeconds(3)));
+        return new AiTransition("wander", ((state, currentCharacter) -> updatesAlive >= state.getTime().getUpdatesFromSeconds(3)));
     }
 
     @Override
