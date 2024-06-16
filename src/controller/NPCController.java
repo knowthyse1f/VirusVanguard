@@ -33,10 +33,10 @@ public class NPCController implements Controller{
         double deltaX = target.getX()-current.getX();
         double deltaY = target.getY()-current.getY();
 
-        up = deltaY<0;
-        right = deltaX>0;
-        down = deltaY>0;
-        left = deltaX<0;
+        up = deltaY<0 && Math.abs(deltaY)> Position.PROXIMITY_RANGE;
+        right = deltaX>0 && Math.abs(deltaX)> Position.PROXIMITY_RANGE;
+        down = deltaY>0 && Math.abs(deltaY)> Position.PROXIMITY_RANGE;
+        left = deltaX<0 && Math.abs(deltaX)> Position.PROXIMITY_RANGE;
     }
 
     public void stop() {

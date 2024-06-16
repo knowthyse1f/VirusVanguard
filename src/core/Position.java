@@ -1,6 +1,8 @@
 package core;
 
 public class Position {
+
+    public static int PROXIMITY_RANGE = 5;
     private double x;
     private double y;
 
@@ -45,6 +47,7 @@ public class Position {
     }
 
     public boolean isInRangeOf(Position position) {
-        return x==position.getX() && y==position.getY();
+        return Math.abs(x-position.getX())< Position.PROXIMITY_RANGE && Math.abs(y-position.getY())<Position.PROXIMITY_RANGE;
+
     }
 }

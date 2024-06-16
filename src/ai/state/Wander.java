@@ -14,12 +14,13 @@ public class Wander extends AiState{
     private List<Position> targets;
 
     public Wander() {
+        super();
         targets = new ArrayList<>();
     }
 
     @Override
     protected AiTransition initializeTransition() {
-        return null;
+        return new AiTransition("stand", ((state, currentCharecter) -> arrived(currentCharecter)));
     }
 
     @Override

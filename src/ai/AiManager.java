@@ -2,6 +2,7 @@ package ai;
 
 import ai.state.AiState;
 import ai.state.Stand;
+import ai.state.Wander;
 import entity.NPC;
 import game.state.State;
 
@@ -9,20 +10,22 @@ public class AiManager {
     private AiState currentAiState;
 
     public AiManager() {
-        transitioTo("stand");
+        transitionTo("stand");
     }
 
-    public void update(State state ,NPC currentCharecter){
-        currentAiState.update(state, currentCharecter);
+    public void update(State state ,NPC currentCharacter){
+        currentAiState.update(state, currentCharacter);
 
-        if(currentAiState.shouldTransition(state, currentCharecter)){
-            transitioTo(currentAiState.getNextState());
+        if(currentAiState.shouldTransition(state, currentCharacter)){
+            transitionTo(currentAiState.getNextState());
         }
     }
 
-    private void transitioTo(String nextState) {
+    private void transitionTo(String nextState) {
         System.out.println("Transition to "+nextState);
         switch (nextState){
+            case "wander":
+                currentAiState= new Wander();
             case "stand":
             default:
                 currentAiState= new Stand();
