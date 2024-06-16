@@ -4,6 +4,10 @@ public class Position {
     private double x;
     private double y;
 
+    public Position(double x, double y){
+        this.x=x;
+        this.y=y;
+    }
     public Position(int x, int y){
         this.x=x;
         this.y=y;
@@ -38,5 +42,9 @@ public class Position {
         Vector2D vector= movement.getVector();
         x+=vector.getX();
         y+=vector.getY();
+    }
+
+    public boolean isInRangeOf(Position position) {
+        return x==position.getX() && y==position.getY();
     }
 }
