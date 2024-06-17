@@ -48,4 +48,8 @@ public class Motion {
     public void multiply(double multiplier) {
     vector.multiply(multiplier);
     }
+
+    public void stop() {
+        vector= new Vector2D(0,0);
+    }
 }
