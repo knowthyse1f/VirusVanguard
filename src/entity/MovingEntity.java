@@ -1,10 +1,7 @@
 package entity;
 
 import controller.Controller;
-import core.CollisionBox;
-import core.Direction;
-import core.Motion;
-import core.Size;
+import core.*;
 import entity.action.Action;
 import entity.action.Cough;
 import entity.effect.Effect;
@@ -74,7 +71,7 @@ public abstract class  MovingEntity extends GameObject{
             motion.update(controller);
         }
         else{
-            motion.stop();
+            motion.stop(true,true);
         }
 
     }
@@ -120,10 +117,13 @@ public abstract class  MovingEntity extends GameObject{
     @Override
     public CollisionBox getCollisionBox() {
 
+        Position positionWithMotion= Position.CopyOf(position);
+        positionWithMotion.apply(motion);
+
         return new CollisionBox(
                 new Rectangle(
-                        position.intX(),
-                        position.intY(),
+                        positionWithMotion.intX(),
+                        positionWithMotion.intY(),
                         collisionBoxSize.getWidth(),
                         collisionBoxSize.getHeight()
                 )
@@ -153,5 +153,18 @@ public abstract class  MovingEntity extends GameObject{
 
     protected void clearEffects() {
         effects.clear();
+    }
+    public boolean willCollideX(GameObject other){
+        CollisionBox otherBox=other.getCollisionBox();
+        Position positionWithXApplied =Position.CopyOf(position);
+        positionWithXApplied.applyx(motion);
+        return CollisionBox.of(positionWithXApplied,collisionBoxSize).collidesWith(otherBox);
+    }
+    public boolean willCollideY(GameObject other){
+        CollisionBox otherBox=other.getCollisionBox();
+        Position positionWithYApplied= Position.CopyOf(position);
+        positionWithYApplied.apply(motion);
+
+        return CollisionBox.of(positionWithYApplied,collisionBoxSize).collidesWith(otherBox);
     }
 }
