@@ -7,24 +7,36 @@ import gfx.ImageUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
-public class UIContainer extends UIComponents {
+public abstract class UIContainer extends UIComponents {
 
-    private Color backgroundColor;
+    protected Color backgroundColor;
+    protected List<UIComponents> children;
 
     public UIContainer() {
         super();
         backgroundColor= Color.CYAN;
+        margin = new Spacing(5);
+        children = new ArrayList<>();
         calculateSize();
         calculatePostion();
 
     }
+
+    protected abstract Size calculateContentSize();
+    protected abstract void calculateContentPosition();
     private void calculateSize(){
-        size= new Size(padding.getHorizontal(), padding.getVertical());
+        Size calculateContentSize = calculateContentSize();
+        size= new Size(
+                padding.getHorizontal() + calculateContentSize.getWidth(),
+                padding.getVertical() + calculateContentSize.getHeight());
     }
 
     private void calculatePostion(){
         postion= new Position(margin.getLeft(), margin.getRight());
+        calculateContentPosition();
     }
 
     @Override
@@ -34,15 +46,33 @@ public class UIContainer extends UIComponents {
 
         graphics.setColor(backgroundColor);
         graphics.fillRect(0,0, size.getWidth(), size.getHeight() );
+
+        for(UIComponents uiComponents : children){
+            graphics.drawImage(
+                    uiComponents.getSprite(),
+                    uiComponents.getPostion().intX(),
+                    uiComponents.getPostion().intY(),
+                    null
+            );
+        }
+
         graphics.dispose();
         return image;
     }
 
     @Override
     public void Update(State state) {
+        children.forEach(uiComponents -> uiComponents.Update(state));
         calculateSize();
         calculatePostion();
 
     }
+    public void addUIComponent(UIComponents uiComponents){
+        children.add(uiComponents);
+    }
 
+    public void setBackgroundColor(Color color) {
+        backgroundColor= color;
+
+    }
 }
