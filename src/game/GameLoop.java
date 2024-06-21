@@ -28,7 +28,7 @@ public class GameLoop implements  Runnable{
         while(running){
             currentTime=System.nanoTime();
             long elapsedTime= currentTime-lastUpdate;
-            accumulator+=elapsedTime;
+            accumulator+=elapsedTime * game.getSettings().getGameSpeedMultiplier();
             lastUpdate=currentTime;
 
             if(accumulator>=updateRateInNanos) {

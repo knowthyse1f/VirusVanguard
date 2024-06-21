@@ -34,6 +34,7 @@ public class Cough extends Action{
 
             state.getGameObjectsOfClass(MovingEntity.class).stream()
                     .filter(movingEntity -> movingEntity.getCollisionBox().collidesWith(spreadArea))
+                    .filter(movingEntity -> !movingEntity.isAffected(Sick.class))
                     .forEach(movingEntity -> {
                         if(Math.random()<risk){
                             movingEntity.addEffect(new Sick());

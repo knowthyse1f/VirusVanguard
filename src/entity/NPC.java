@@ -1,7 +1,7 @@
 package entity;
 
 import ai.AiManager;
-import controller.Controller;
+import controller.EntityController;
 import game.state.State;
 import gfx.AnimationManager;
 import gfx.SpriteLibrary;
@@ -9,8 +9,8 @@ import gfx.SpriteLibrary;
 public class NPC extends MovingEntity{
     private AiManager aiManager;
 
-    public NPC(Controller controller, SpriteLibrary spriteLibrary) {
-        super(controller, spriteLibrary);
+    public NPC(EntityController entityController, SpriteLibrary spriteLibrary) {
+        super(entityController, spriteLibrary);
         animationManager = new AnimationManager(spriteLibrary.getUnit("dave"));
         aiManager=new AiManager();
     }
