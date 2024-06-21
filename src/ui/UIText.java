@@ -57,13 +57,17 @@ public class UIText extends UIComponents{
 
     private void calculateSize() {
         FontMetrics fontMetrics= new Canvas().getFontMetrics(font);
-        size = new Size(
-                fontMetrics.stringWidth(text) + padding.getHorizontal(),
-                fontMetrics.getHeight() + padding.getVertical()
-        );
+        int width=fontMetrics.stringWidth(text) + padding.getHorizontal();
+        int height=fontMetrics.getHeight() + padding.getVertical();
+        if(dropShadow)width+=dropShadowOffSet;
+        size = new Size(width,height);
     }
 
     private void createFont() {
         font = new Font(fontFamily, fontStyle, fontSize);
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

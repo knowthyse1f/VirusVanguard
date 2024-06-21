@@ -33,6 +33,7 @@ public abstract class State {
         time=new Time();
     }
     public void update(){
+        time.update();
         sortObjectsByPosition();
         gameObjects.forEach(gameObject -> gameObject.update(this));
         uiContainers.forEach(uiContainer -> uiContainer.Update(this));
