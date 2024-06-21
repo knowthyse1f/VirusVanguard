@@ -13,16 +13,23 @@ import java.util.List;
 public abstract class UIContainer extends UIComponents {
 
     protected Color backgroundColor;
+
+    protected  Alignment alignment;
+    protected  Size windowSize;
+
     protected List<UIComponents> children;
 
-    public UIContainer() {
+
+    public UIContainer(Size windowSize) {
         super();
+        this.windowSize=windowSize;
+        alignment= new Alignment(Alignment.Position.START, Alignment.Position.START);
         backgroundColor= Color.CYAN;
         margin = new Spacing(5);
         padding=new Spacing(5);
         children = new ArrayList<>();
         calculateSize();
-        calculatePostion();
+        calculatePosition();
 
     }
 
@@ -35,10 +42,26 @@ public abstract class UIContainer extends UIComponents {
                 padding.getVertical() + calculateContentSize.getHeight());
     }
 
-    private void calculatePostion(){
-        postion= new Position(margin.getLeft(), margin.getRight());
+    private void calculatePosition() {
+        int x = padding.getLeft();
+        if (alignment.getHorizontal().equals(Alignment.Position.CENTER)) {
+            x = windowSize.getWidth() / 2 - size.getWidth() / 2;
+        } else if (alignment.getHorizontal().equals(Alignment.Position.END)) {
+            x = windowSize.getWidth() - size.getWidth() - margin.getRight();
+        }
+
+        int y = padding.getTop();
+        if (alignment.getVertical().equals(Alignment.Position.CENTER)) {
+            y = windowSize.getHeight() / 2 - size.getHeight() / 2;
+        } else if (alignment.getVertical().equals(Alignment.Position.END)) {
+            y = windowSize.getHeight() - size.getHeight() - margin.getBottom();
+        }
+
+        // Ensure to set the position
+        this.postion = new core.Position(x, y); // Add this line
         calculateContentPosition();
     }
+
 
     @Override
     public Image getSprite() {
@@ -65,7 +88,7 @@ public abstract class UIContainer extends UIComponents {
     public void Update(State state) {
         children.forEach(uiComponents -> uiComponents.Update(state));
         calculateSize();
-        calculatePostion();
+        calculatePosition();
 
     }
     public void addUIComponent(UIComponents uiComponents){
@@ -75,5 +98,9 @@ public abstract class UIContainer extends UIComponents {
     public void setBackgroundColor(Color color) {
         backgroundColor= color;
 
+    }
+
+    public void setAlignment(Alignment alignment) {
+        this.alignment = alignment;
     }
 }

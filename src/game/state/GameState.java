@@ -19,16 +19,22 @@ public class GameState extends State{
         super(windowSize,input);
         gameMap= new GameMap(new Size(20,20), spriteLibrary);
         initializeCharacters();
-        initializeUI();
+        initializeUI(windowSize);
     }
 
-    private void initializeUI() {
-        UIContainer container=new VerticalContainer();
+    private void initializeUI(Size windowSize) {
+        UIContainer container=new VerticalContainer(windowSize);
         container.setPadding(new Spacing(5));
         container.setBackgroundColor(new Color(0,0,0, 0));
 
-        container.addUIComponent(new UIText("Hello UI World"));
+        UIContainer containerEnd=new VerticalContainer(windowSize);
+        containerEnd.setPadding(new Spacing(5));
+        containerEnd.setBackgroundColor(new Color(0,0,0, 0));
+        containerEnd.setAlignment(new Alignment(Alignment.Position.END, Alignment.Position.START));
+        container.addUIComponent(new UIText("Hello Hello Tajree"));
+        containerEnd.addUIComponent(new UIText("Hello Hello Safu"));
         uiContainers.add(container);
+        uiContainers.add(containerEnd);
     }
 
     private void initializeCharacters() {
