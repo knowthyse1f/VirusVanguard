@@ -21,6 +21,8 @@ public abstract class  MovingEntity extends GameObject{
     protected Direction direction;
     protected List<Effect>effects;
     protected Optional<Action>action;
+
+    protected Vector2D directionVector;
     protected Size collisionBoxSize;
 
     public MovingEntity(EntityController entityController, SpriteLibrary spriteLibrary) {
@@ -28,11 +30,13 @@ public abstract class  MovingEntity extends GameObject{
         this.entityController = entityController;
         this.motion= new Motion(2);
         this.direction=Direction.S;
+        this.directionVector = new Vector2D(0,0);
         this.animationManager=new AnimationManager(spriteLibrary.getUnit("matt"));
         effects=new ArrayList<>();
         action= Optional.empty();
         this.collisionBoxSize=new Size(16,26);
         this.renderOffset = new Position(size.getWidth()/2, size.getHeight()-12);
+        this.collisionBoxOffset = new Position(collisionBoxSize.getWidth()/2, collisionBoxSize.getHeight());
     }
 
     @Override
@@ -105,6 +109,7 @@ public abstract class  MovingEntity extends GameObject{
     private void manageDirection() {
         if(motion.isMoving()){
             this.direction=Direction.fromMotion(motion);
+            this.directionVector=motion.getDirection();
         }
     }
 
@@ -115,11 +120,12 @@ public abstract class  MovingEntity extends GameObject{
 
         Position positionWithMotion= Position.CopyOf(getPosition());
         positionWithMotion.apply(motion);
+        positionWithMotion.subtract(collisionBoxOffset);
 
         return new CollisionBox(
                 new Rectangle(
-                        positionWithMotion.intX()-collisionBoxSize.getWidth()/2,
-                        positionWithMotion.intY()-collisionBoxSize.getHeight(),
+                        positionWithMotion.intX(),
+                        positionWithMotion.intY(),
                         collisionBoxSize.getWidth(),
                         collisionBoxSize.getHeight()
                 )
@@ -135,9 +141,7 @@ public abstract class  MovingEntity extends GameObject{
         return entityController;
     }
 
-    public void multiplypeed(double multiplier) {
-    motion.multiply(multiplier);
-    }
+
 
     public void perform(Action action) {
         this.action= Optional.of(action);
@@ -154,12 +158,15 @@ public abstract class  MovingEntity extends GameObject{
         CollisionBox otherBox=other.getCollisionBox();
         Position positionWithXApplied =Position.CopyOf(position);
         positionWithXApplied.applyx(motion);
+        positionWithXApplied.subtract(collisionBoxOffset);
+
         return CollisionBox.of(positionWithXApplied,collisionBoxSize).collidesWith(otherBox);
     }
     public boolean willCollideY(GameObject other){
         CollisionBox otherBox=other.getCollisionBox();
         Position positionWithYApplied= Position.CopyOf(position);
         positionWithYApplied.apply(motion);
+        positionWithYApplied.subtract(collisionBoxOffset);
 
         return CollisionBox.of(positionWithYApplied,collisionBoxSize).collidesWith(otherBox);
     }
@@ -167,5 +174,12 @@ public abstract class  MovingEntity extends GameObject{
     public boolean isAffected(Class<?> clazz) {
         return  effects.stream()
                 .anyMatch(effect -> clazz.isInstance(effect));
+    }
+
+    public boolean isFacing(Position other){
+        Vector2D direction = Vector2D.directionBetweenPositions(other, getPosition());
+        double dotProduct = Vector2D.dotProduct(direction, directionVector);
+
+        return dotProduct > 0;
     }
 }

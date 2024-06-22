@@ -11,6 +11,7 @@ import java.awt.*;
 public abstract class GameObject {
     protected Position position;
     protected Position renderOffset;
+    protected Position collisionBoxOffset;
     protected Size size;
 
     protected int renderOrder;
@@ -21,6 +22,7 @@ public abstract class GameObject {
         position=new Position(0,0);
         renderOffset= new Position(0,0);
         size= new Size(64,64);
+        collisionBoxOffset = new Position(0,0);
         renderOrder=5;
 
     }
@@ -62,5 +64,9 @@ public abstract class GameObject {
 
     public int getRenderOrder() {
         return renderOrder;
+    }
+
+    protected void clearParent() {
+        parent = null;
     }
 }
