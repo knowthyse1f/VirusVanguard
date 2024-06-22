@@ -19,9 +19,7 @@ public class Input implements KeyListener {
         return false;
     }
 
-    //public boolean isCurrentlyPressed(int keyCode){
-       // return currentlyPressed[keyCode];
-   // }
+
 
     @Override
     public void keyTyped(KeyEvent e) {

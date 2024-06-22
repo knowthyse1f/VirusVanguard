@@ -11,6 +11,8 @@ public abstract class GameObject {
     protected Position position;
     protected Size size;
 
+    protected GameObject parent;
+
     public GameObject() {
         position=new Position(50,50);
         size= new Size(50,50);
@@ -20,10 +22,17 @@ public abstract class GameObject {
     public abstract void update(State state);
     public abstract Image getSprite();
     public abstract CollisionBox getCollisionBox();
-    public abstract boolean collidesWith(GameObject other);
+
+    public  boolean collidesWith(GameObject other){
+        return getCollisionBox().collidesWith(other.getCollisionBox());
+    }
 
     public Position getPosition() {
-        return position;
+        Position finalposition = Position.CopyOf(position);
+        if(parent!=null){
+            finalposition.add(parent.getPosition());
+        }
+        return finalposition;
     }
 
     public void setPosition(Position position) {
@@ -32,5 +41,9 @@ public abstract class GameObject {
 
     public Size getSize() {
         return size;
+    }
+
+    public void setParent(GameObject parent) {
+        this.parent = parent;
     }
 }
