@@ -15,8 +15,8 @@ public class SelectionCircle extends GameObject{
     private BufferedImage sprite;
 
     public SelectionCircle() {
-        color = Color.ORANGE;
-        size = new Size(32,16);
+        color = new Color(0,255,255);
+        size = new Size(40,30);
         renderOffset = new Position(size.getWidth()/2, size.getHeight());
         collisionBoxOffset= renderOffset;
         renderOrder=4;
