@@ -3,6 +3,7 @@ package game.state;
 import core.Position;
 import core.Size;
 import display.Camera;
+import entity.Bubble;
 import entity.GameObject;
 import game.Time;
 import gfx.SpriteLibrary;
@@ -81,5 +82,13 @@ public abstract class State {
                 .filter(clazz::isInstance)
                 .map(gameObject -> (T) gameObject)
                 .collect(Collectors.toList());
+    }
+
+    public SpriteLibrary getSpritelibrary() {
+        return spriteLibrary;
+    }
+
+    public void spawn(GameObject gameObject) {
+        gameObjects.add(gameObject);
     }
 }

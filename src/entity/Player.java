@@ -2,6 +2,7 @@ package entity;
 
 import controller.EntityController;
 import entity.humanoid.Humanoid;
+import entity.humanoid.action.BlowBubble;
 import game.Game;
 import game.state.State;
 import gfx.SpriteLibrary;
@@ -26,6 +27,16 @@ public class Player extends Humanoid {
     public void update(State state){
         super.update(state);
         handleTarget(state);
+
+        handleInput(state);
+    }
+
+    private void handleInput(State state) {
+        if(entityController.isRequestingAction()){
+            if(target!=null){
+                perform(new BlowBubble(target));
+            }
+        }
     }
 
     private void handleTarget(State state) {
