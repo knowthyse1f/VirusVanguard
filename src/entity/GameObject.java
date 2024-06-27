@@ -53,6 +53,7 @@ public abstract class GameObject {
 
     public void setParent(GameObject parent) {
         this.parent = parent;
+        this.position=new Position(0,0);
     }
 
     public Position getRenderPosition(Camera camera) {
