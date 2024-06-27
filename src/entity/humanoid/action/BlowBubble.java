@@ -3,6 +3,7 @@ package entity.humanoid.action;
 import controller.NPCController;
 import entity.Bubble;
 import entity.humanoid.Humanoid;
+import entity.humanoid.effect.Untargetable;
 import game.GameLoop;
 import game.state.State;
 
@@ -15,6 +16,7 @@ public class BlowBubble extends  Action{
     public BlowBubble(Humanoid target) {
         lifeSpanINupdates= GameLoop.UPDATES_PER_SECOND;
         this.target = target;
+        interruptable=false;
     }
 
     @Override
@@ -24,9 +26,15 @@ public class BlowBubble extends  Action{
         if(bubble==null){
             bubbleTarget(state);
         }
+        if(isDone()){
+            target.setRenderOrder(6);
+            bubble.setRenderOrder(6);
+        }
     }
 
     private void bubbleTarget(State state) {
+        target.perform(new Levitate());
+        target.addEffect(new Untargetable());
         bubble=new Bubble(new NPCController(), state.getSpritelibrary());
         bubble.insert(target);
         state.spawn(bubble);

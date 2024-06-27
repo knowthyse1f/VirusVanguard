@@ -3,6 +3,7 @@ package entity;
 import controller.EntityController;
 import entity.humanoid.Humanoid;
 import entity.humanoid.action.BlowBubble;
+import entity.humanoid.effect.Untargetable;
 import game.Game;
 import game.state.State;
 import gfx.SpriteLibrary;
@@ -46,7 +47,7 @@ public class Player extends Humanoid {
             NPC npc = closestNPC.get();
 
             if(!npc.equals(target)){
-                selectionCircle.setParent(npc);
+                selectionCircle.parent(npc);
                 target = npc;
             }
         }else{
@@ -59,6 +60,7 @@ public class Player extends Humanoid {
         return state.getGameObjectsOfClass(NPC.class).stream()
                 .filter(npc -> getPosition().distanceTo(npc.getPosition()) < targetRange)
                 .filter(npc -> isFacing(npc.getPosition()))
+                .filter(npc-> !npc.isAffected(Untargetable.class))
                 .min(Comparator.comparingDouble(npc -> position.distanceTo(npc.getPosition())));
     }
 

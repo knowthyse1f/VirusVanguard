@@ -51,7 +51,7 @@ public abstract class GameObject {
         return size;
     }
 
-    public void setParent(GameObject parent) {
+    public void parent(GameObject parent) {
         this.parent = parent;
         this.position=new Position(0,0);
     }
@@ -73,5 +73,9 @@ public abstract class GameObject {
 
     protected Position getRenderOffset() {
         return renderOffset;
+    }
+
+    public void setRenderOrder(int renderOrder) {
+        this.renderOrder=renderOrder;
     }
 }
