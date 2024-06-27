@@ -20,7 +20,7 @@ public class SpriteLibrary {
     private void loadSpritesFromDisk() {
         loadSpriteSets("/sprites/units");
         loadImages("/sprites/tiles");
-       loadImages("/sprites/effects");
+        loadImages("/sprites/effects");
 
     }
 

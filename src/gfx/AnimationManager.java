@@ -17,7 +17,7 @@ public class AnimationManager {
     private boolean looping;
 
     public AnimationManager(SpriteSet spriteSet){
-       this(spriteSet,true);
+        this(spriteSet,true);
     }
     public AnimationManager(SpriteSet spriteSet, boolean looping){
         this.spriteSet=spriteSet;
@@ -32,7 +32,7 @@ public class AnimationManager {
 
     public Image getSprite(){
         return currentAnimationSheet.getSubimage(
-            frameIndex* Game.SPRITE_SIZE,
+                frameIndex* Game.SPRITE_SIZE,
                 directionIndex* Game.SPRITE_SIZE,
                 Game.SPRITE_SIZE,
                 Game.SPRITE_SIZE

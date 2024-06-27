@@ -23,7 +23,7 @@ public class SpriteSet {
 
     public Image getOrGetDefault(String name){
         if(aninationSheets.containsKey(name))
-        return  aninationSheets.get(name);
+            return  aninationSheets.get(name);
         return aninationSheets.get("default");
 
     }
