@@ -4,6 +4,7 @@ import core.Size;
 import entity.MovingEntity;
 import entity.humanoid.Humanoid;
 import entity.humanoid.effect.Sick;
+import game.state.GameState;
 import game.state.State;
 import ui.*;
 
@@ -34,14 +35,11 @@ public class UISicknaceStatistics extends HorizontalContainer {
     @Override
     public  void Update(State state){
         super.Update(state);
-        long sickCount= state.getGameObjectsOfClass(Humanoid.class).stream()
-                .filter(humanoid -> humanoid.isAffected(Sick.class))
-                .count();
+        if(state instanceof GameState){
+            GameState gameState =(GameState) state;
+            numberOfSick.setText(String.format("%d (%d)",gameState.getNumberOfSick(),gameState.getNumberOfIsolated()));
+            numberOfHealthy.setText(String.valueOf(gameState.getNumberOfHealthy()));
+        }
 
-        long healthyCount= state.getGameObjectsOfClass(Humanoid.class).stream()
-                .filter(humanoid -> !humanoid.isAffected(Sick.class))
-                .count();
-        numberOfSick.setText(String.valueOf(sickCount));
-        numberOfHealthy.setText(String.valueOf(healthyCount));
     }
 }

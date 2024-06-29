@@ -89,4 +89,9 @@ public class Humanoid extends MovingEntity {
     protected void handleCollision(GameObject other) {
 
     }
+
+
+    public List <Effect> getEffects() {
+        return effects;
+    }
 }
