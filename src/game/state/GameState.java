@@ -54,7 +54,7 @@ public class GameState extends State{
         gameObjects.add(circle);
 
         initializeNPCs(200);
-        makeNumberOfNPCsSick(0);
+        makeNumberOfNPCsSick(10);
     }
 
     private void makeNumberOfNPCsSick(int number) {
@@ -79,33 +79,22 @@ public class GameState extends State{
             if(victoryCondtions.stream().allMatch(Condition::isMet)){
                 win();
             }
-            else if(defeateConditions.stream().allMatch(Condition::isMet)){
-                lost(this);
+            if(defeateConditions.stream().allMatch(Condition::isMet)){
+                lost();
             }
-            else{
-                draw();
-            }
+
         }
     }
 
-    private static void lost(GameState gameState) {
-        gameState.playing =false;
-
-        VerticalContainer lossContainer=new VerticalContainer(gameState.camera.getSize());
-        lossContainer.setAlignment(new Alignment(Alignment.Position.CENTER,Alignment.Position.CENTER));
-        lossContainer.addUIComponent(new UIText("LOSE"));
-        gameState.uiContainers.add(lossContainer);
-    }
-
-    private void draw() {
+    private  void lost() {
         playing=false;
 
-        VerticalContainer drawContainer=new VerticalContainer(camera.getSize());
-        drawContainer.setAlignment(new Alignment(Alignment.Position.CENTER,Alignment.Position.CENTER));
-        drawContainer.addUIComponent(new UIText("DRAW"));
-        uiContainers.add(drawContainer);
-
+        VerticalContainer lossContainer=new VerticalContainer(camera.getSize());
+        lossContainer.setAlignment(new Alignment(Alignment.Position.CENTER,Alignment.Position.CENTER));
+        lossContainer.addUIComponent(new UIText("loss"));
+        uiContainers.add(lossContainer);
     }
+
 
     private void win() {
         playing=false;

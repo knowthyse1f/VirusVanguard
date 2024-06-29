@@ -39,6 +39,14 @@ public abstract class State {
         updateGameObjects();
         uiContainers.forEach(uiContainer -> uiContainer.Update(this));
         camera.update(this);
+        handleMouseInput();
+    }
+
+    private void handleMouseInput() {
+        if(input.isMouseClicked()){
+            System.out.println(String.format("MOUSE CLICKED AT POSITION x : %.0f  y: %.0f ", input.getMousePosition().getX(),input.getMousePosition().getY()));
+        }
+        input.clearMouseClicke();
     }
 
     private void updateGameObjects() {
