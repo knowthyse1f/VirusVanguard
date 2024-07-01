@@ -3,7 +3,6 @@ package game.state;
 import core.Position;
 import core.Size;
 import display.Camera;
-import entity.Bubble;
 import entity.GameObject;
 import game.Time;
 import gfx.SpriteLibrary;
@@ -105,5 +104,9 @@ public abstract class State {
 
     public void spawn(GameObject gameObject) {
         gameObjects.add(gameObject);
+    }
+
+    public Input getInput() {
+        return input;
     }
 }

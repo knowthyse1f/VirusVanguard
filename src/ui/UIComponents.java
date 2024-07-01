@@ -7,13 +7,15 @@ import game.state.State;
 import java.awt.*;
 
 public abstract class UIComponents {
-    protected Position postion;
+    protected Position realtivePostion;
+    protected Position absulutePostion;
     protected Size size;
     protected Spacing margin;
     protected Spacing padding;
 
     public UIComponents() {
-        postion =new Position(0,0);
+        realtivePostion =new Position(0,0);
+        absulutePostion=new Position(0,0);
         size= new Size(1,1);
         margin=new Spacing(0);
         padding=new Spacing(0);
@@ -22,8 +24,8 @@ public abstract class UIComponents {
     public abstract void Update(State state);
 
 
-    public void setPostion(Position postion) {
-        this.postion = postion;
+    public void setRealtivePostion(Position realtivePostion) {
+        this.realtivePostion = realtivePostion;
     }
 
     public void setSize(Size size) {
@@ -38,8 +40,8 @@ public abstract class UIComponents {
         this.padding = padding;
     }
 
-    public Position getPostion() {
-        return postion;
+    public Position getRealtivePostion() {
+        return realtivePostion;
     }
 
     public Size getSize() {
@@ -52,6 +54,14 @@ public abstract class UIComponents {
 
     public Spacing getPadding() {
         return padding;
+    }
+
+    public Position getAbsulutePostion() {
+        return absulutePostion;
+    }
+
+    public void setAbsulutePostion(Position absulutePostion) {
+        this.absulutePostion = absulutePostion;
     }
 }
 

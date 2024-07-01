@@ -27,7 +27,8 @@ public class HorizontalContainer extends UIContainer{
 
         for(UIComponents uiComponents : children){
             currentX+=uiComponents.getMargin().getLeft();
-            uiComponents.setPostion(new Position(currentX,padding.getTop()));
+            uiComponents.setRealtivePostion(new Position(currentX,padding.getTop()));
+            uiComponents.setAbsulutePostion(new Position(currentX+absulutePostion.intX(),padding.getTop()+absulutePostion.intY()));
             currentX+=uiComponents.getSize().getWidth();
             currentX+=uiComponents.getMargin().getRight();
         }

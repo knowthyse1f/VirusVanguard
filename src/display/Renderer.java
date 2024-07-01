@@ -18,8 +18,8 @@ public class Renderer {
     private void renderUI(State state, Graphics graphics) {
         state.getUiContainers().forEach(uiContainer -> graphics.drawImage(
                 uiContainer.getSprite(),
-                uiContainer.getPostion().intX(),
-                uiContainer.getPostion().intY(),
+                uiContainer.getRealtivePostion().intX(),
+                uiContainer.getRealtivePostion().intY(),
                 null
         ));
     }

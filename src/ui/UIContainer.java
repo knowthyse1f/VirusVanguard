@@ -1,6 +1,5 @@
 package ui;
 
-import core.Position;
 import core.Size;
 import game.state.State;
 import gfx.ImageUtils;
@@ -13,9 +12,10 @@ import java.util.List;
 public abstract class UIContainer extends UIComponents {
 
     protected Color backgroundColor;
-
     protected  Alignment alignment;
     protected  Size windowSize;
+
+    protected Size fixedSize;
 
     protected List<UIComponents> children;
 
@@ -37,7 +37,8 @@ public abstract class UIContainer extends UIComponents {
     protected abstract void calculateContentPosition();
     private void calculateSize(){
         Size calculateContentSize = calculateContentSize();
-        size= new Size(
+        size= fixedSize !=null ? fixedSize
+    : new Size(
                 padding.getHorizontal() + calculateContentSize.getWidth(),
                 padding.getVertical() + calculateContentSize.getHeight());
     }
@@ -58,7 +59,8 @@ public abstract class UIContainer extends UIComponents {
         }
 
         // Ensure to set the position
-        this.postion = new core.Position(x, y); // Add this line
+        this.realtivePostion = new core.Position(x, y); // Add this line
+        this.absulutePostion= new core.Position(x,y);
         calculateContentPosition();
     }
 
@@ -74,8 +76,8 @@ public abstract class UIContainer extends UIComponents {
         for(UIComponents uiComponents : children){
             graphics.drawImage(
                     uiComponents.getSprite(),
-                    uiComponents.getPostion().intX(),
-                    uiComponents.getPostion().intY(),
+                    uiComponents.getRealtivePostion().intX(),
+                    uiComponents.getRealtivePostion().intY(),
                     null
             );
         }
@@ -102,5 +104,9 @@ public abstract class UIContainer extends UIComponents {
 
     public void setAlignment(Alignment alignment) {
         this.alignment = alignment;
+    }
+
+    public void setFixedSize(Size fixedSize) {
+        this.fixedSize = fixedSize;
     }
 }

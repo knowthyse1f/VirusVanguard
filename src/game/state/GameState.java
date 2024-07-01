@@ -16,7 +16,9 @@ import map.GameMap;
 import ui.Alignment;
 import ui.UIText;
 import ui.VerticalContainer;
+import ui.clickable.UIButton;
 
+import java.awt.*;
 import java.util.List;
 
 public class GameState extends State{
@@ -54,7 +56,7 @@ public class GameState extends State{
         gameObjects.add(circle);
 
         initializeNPCs(200);
-        makeNumberOfNPCsSick(10);
+        makeNumberOfNPCsSick(0);
     }
 
     private void makeNumberOfNPCsSick(int number) {
@@ -101,7 +103,11 @@ public class GameState extends State{
 
         VerticalContainer winContainer=new VerticalContainer(camera.getSize());
         winContainer.setAlignment(new Alignment(Alignment.Position.CENTER,Alignment.Position.CENTER));
-        winContainer.addUIComponent(new UIText("VICTORY"));
+       winContainer.setBackgroundColor(Color.RED);
+        winContainer.addUIComponent(new UIButton("Menu",()-> System.out.println("Button 1 pressed")));
+        winContainer.addUIComponent(new UIButton("Options",()-> System.out.println("Button 1 pressed")));
+        winContainer.addUIComponent(new UIButton("Exit",()-> System.exit(0)));
+
         uiContainers.add(winContainer);
     }
 
