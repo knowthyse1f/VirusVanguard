@@ -1,7 +1,7 @@
 package display;
 
 
-import game.state.State;
+import state.State;
 import input.Input;
 
 import javax.swing.*;

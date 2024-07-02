@@ -1,9 +1,10 @@
-package game.state;
+package state;
 
 import core.Position;
 import core.Size;
 import display.Camera;
 import entity.GameObject;
+import game.Game;
 import game.Time;
 import gfx.SpriteLibrary;
 import input.Input;
@@ -24,21 +25,28 @@ public abstract class State {
     protected Input input;
     protected Camera camera;
     protected Time time;
+    protected Size windowSize;
+    private State nextState;
+
     public State(Size windowSize, Input input) {
         this.input=input;
+        this.windowSize=windowSize;
         spriteLibrary= new SpriteLibrary();
         gameObjects=new ArrayList<>();
         uiContainers=new ArrayList<>();
         camera=new Camera(windowSize);
         time=new Time();
     }
-    public void update(){
+    public void update(Game game){
         time.update();
         sortObjectsByPosition();
         updateGameObjects();
-        uiContainers.forEach(uiContainer -> uiContainer.Update(this));
+        List.copyOf(uiContainers).forEach(uiContainer -> uiContainer.Update(this));
         camera.update(this);
         handleMouseInput();
+        if(nextState !=null){
+            game.enterState(nextState);
+        }
     }
 
     private void handleMouseInput() {
@@ -108,5 +116,9 @@ public abstract class State {
 
     public Input getInput() {
         return input;
+    }
+
+    public void setNextState(State nextState) {
+        this.nextState = nextState;
     }
 }

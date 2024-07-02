@@ -2,7 +2,7 @@ package ai.state;
 
 import ai.AiTransition;
 import entity.NPC;
-import game.state.State;
+import state.State;
 
 public abstract class AiState {
     private AiTransition transition;

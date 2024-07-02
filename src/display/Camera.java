@@ -4,7 +4,7 @@ import core.Position;
 import core.Size;
 import entity.GameObject;
 import game.Game;
-import game.state.State;
+import state.State;
 
 
 import java.awt.*;
@@ -23,6 +23,7 @@ public class Camera {
     public Camera(Size windowSize) {
         this.position=new Position(0,0);
         this.windowSize=windowSize;
+        this.objectWithFocus=Optional.empty();
         calculateViewBounds();
     }
 

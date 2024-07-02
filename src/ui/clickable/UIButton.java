@@ -1,7 +1,7 @@
 package ui.clickable;
 
 import core.Size;
-import game.state.State;
+import state.State;
 import ui.UIContainer;
 import ui.UIText;
 import ui.VerticalContainer;
@@ -13,11 +13,11 @@ public class UIButton extends  UIClickable {
     private UIContainer container;
     private UIText label;
 
-    private  Runnable clickEvent;
+    private  ClickAction clickAction;
 
-    public UIButton(String label,Runnable clickEvent) {
+    public UIButton(String label,ClickAction clickEvent) {
         this.label= new UIText(label);
-        this.clickEvent = clickEvent;
+        this.clickAction = clickEvent;
 
         container= new VerticalContainer(new Size(0,0));
         container.addUIComponent(this.label);
@@ -30,13 +30,13 @@ public class UIButton extends  UIClickable {
         container.Update(state);
         size= container.getSize();
 
-        Color color=Color.orange;
+        Color color=Color.GRAY;
 
         if(hasFocus){
             color= Color.LIGHT_GRAY;
         }
         if(isPressed){
-            color= Color.GREEN;
+            color= Color.WHITE;
         }
 
         container.setBackgroundColor(color);
@@ -48,7 +48,7 @@ public class UIButton extends  UIClickable {
     }
 
     @Override
-    protected void onClick() {
-        clickEvent.run();
+    protected void onClick(State state) {
+        clickAction.execute(state);
     }
 }

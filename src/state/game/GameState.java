@@ -1,4 +1,4 @@
-package game.state;
+package state.game;
 
 import controller.NPCController;
 import controller.PlayerController;
@@ -9,10 +9,13 @@ import entity.Player;
 import entity.SelectionCircle;
 import entity.humanoid.effect.Isolated;
 import entity.humanoid.effect.Sick;
-import game.ui.UIGameTime;
-import game.ui.UISicknaceStatistics;
+import game.Game;
+import state.State;
+import state.game.ui.UIGameTime;
+import state.game.ui.UISicknaceStatistics;
 import input.Input;
 import map.GameMap;
+import state.menu.MenuState;
 import ui.Alignment;
 import ui.UIText;
 import ui.VerticalContainer;
@@ -21,7 +24,7 @@ import ui.clickable.UIButton;
 import java.awt.*;
 import java.util.List;
 
-public class GameState extends State{
+public class GameState extends State {
 
     private List<Condition>victoryCondtions;
     private List<Condition>defeateConditions;
@@ -75,8 +78,8 @@ public class GameState extends State{
         }
     }
     @Override
-    public void update(){
-        super.update();
+    public void update(Game game){
+        super.update(game);
         if(playing){
             if(victoryCondtions.stream().allMatch(Condition::isMet)){
                 win();
@@ -103,10 +106,10 @@ public class GameState extends State{
 
         VerticalContainer winContainer=new VerticalContainer(camera.getSize());
         winContainer.setAlignment(new Alignment(Alignment.Position.CENTER,Alignment.Position.CENTER));
-       winContainer.setBackgroundColor(Color.RED);
-        winContainer.addUIComponent(new UIButton("Menu",()-> System.out.println("Button 1 pressed")));
-        winContainer.addUIComponent(new UIButton("Options",()-> System.out.println("Button 1 pressed")));
-        winContainer.addUIComponent(new UIButton("Exit",()-> System.exit(0)));
+       winContainer.setBackgroundColor(Color.DARK_GRAY);
+        winContainer.addUIComponent(new UIButton("Menu",(state)-> state.setNextState(new MenuState(windowSize,input))));
+        winContainer.addUIComponent(new UIButton("Options",(state)-> System.out.println("Button 1 pressed")));
+        winContainer.addUIComponent(new UIButton("Exit",(state)-> System.exit(0)));
 
         uiContainers.add(winContainer);
     }
