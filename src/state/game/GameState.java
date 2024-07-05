@@ -59,7 +59,7 @@ public class GameState extends State {
         gameObjects.add(circle);
 
         initializeNPCs(200);
-        makeNumberOfNPCsSick(0);
+        makeNumberOfNPCsSick(20);
     }
 
     private void makeNumberOfNPCsSick(int number) {
@@ -106,7 +106,7 @@ public class GameState extends State {
 
         VerticalContainer winContainer=new VerticalContainer(camera.getSize());
         winContainer.setAlignment(new Alignment(Alignment.Position.CENTER,Alignment.Position.CENTER));
-       winContainer.setBackgroundColor(Color.DARK_GRAY);
+         winContainer.setBackgroundColor(Color.DARK_GRAY);
         winContainer.addUIComponent(new UIButton("Menu",(state)-> state.setNextState(new MenuState(windowSize,input))));
         winContainer.addUIComponent(new UIButton("Options",(state)-> System.out.println("Button 1 pressed")));
         winContainer.addUIComponent(new UIButton("Exit",(state)-> System.exit(0)));
