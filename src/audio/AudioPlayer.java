@@ -39,7 +39,7 @@ public class AudioPlayer {
 
     private Clip getClip(String fileName){
 
-        final URL soundFile = AudioPlayer.class.getResource("/sound/"+ fileName);
+        final URL soundFile = AudioPlayer.class.getResource("/sounds/"+ fileName);
         try(AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile)){
             final Clip clip = AudioSystem.getClip();
             clip.open(audioInputStream);
