@@ -13,6 +13,8 @@ public abstract class UIComponents {
     protected Spacing margin;
     protected Spacing padding;
 
+    protected UIContainer parent;
+
     public UIComponents() {
         realtivePostion =new Position(0,0);
         absulutePostion=new Position(0,0);
@@ -62,6 +64,10 @@ public abstract class UIComponents {
 
     public void setAbsulutePostion(Position absulutePostion) {
         this.absulutePostion = absulutePostion;
+    }
+
+    public void setParent(UIContainer parent) {
+        this.parent = parent;
     }
 }
 

@@ -59,8 +59,11 @@ public abstract class UIContainer extends UIComponents {
         }
 
         // Ensure to set the position
-        this.realtivePostion = new core.Position(x, y); // Add this line
-        this.absulutePostion= new core.Position(x,y);
+        this.realtivePostion = new core.Position(x, y);
+        if(parent==null){
+            this.absulutePostion= new core.Position(x,y);
+        }
+        // Add this line
         calculateContentPosition();
     }
 
@@ -95,6 +98,7 @@ public abstract class UIContainer extends UIComponents {
     }
     public void addUIComponent(UIComponents uiComponents){
         children.add(uiComponents);
+        uiComponents.setParent(this);
     }
 
     public void setBackgroundColor(Color color) {

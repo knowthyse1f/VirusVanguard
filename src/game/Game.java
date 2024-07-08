@@ -22,8 +22,8 @@ public class Game {
 
         input=new Input();
         display= new Display(width, height,input);
-        state= new MenuState(new Size(width,height),input);
         settings=new GameSetting(false);
+        state= new MenuState(new Size(width,height),input, settings);
         gameController= new GameController(input);
 
     }

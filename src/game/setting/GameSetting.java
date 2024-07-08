@@ -5,15 +5,16 @@ public class GameSetting {
     private boolean debugMood;
     private double gameSpeedMultiplier;
 
-    private float musicVolume;
-    private float soundVolume;
+    private AudioSettings audioSettings;
+
+
 
     public GameSetting(boolean debugMood) {
 
         this.debugMood = debugMood;
         gameSpeedMultiplier=1;
-        musicVolume = 0;
-        soundVolume = 0;
+        audioSettings = new AudioSettings();
+
     }
 
     public boolean isDebugMood() {
@@ -35,19 +36,9 @@ public class GameSetting {
         return gameSpeedMultiplier;
     }
 
-    public float getMusicVolume() {
-        return musicVolume;
-    }
 
-    public void setMusicVolume(float musicVolume) {
-        this.musicVolume = musicVolume;
-    }
 
-    public float getSoundVolume() {
-        return soundVolume;
-    }
-
-    public void setSoundVolume(float soundVolume) {
-        this.soundVolume = soundVolume;
+    public AudioSettings getAudioSettings() {
+        return audioSettings;
     }
 }
