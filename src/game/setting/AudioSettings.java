@@ -1,12 +1,14 @@
 package game.setting;
 
+import audio.AudioClip;
+
 public class AudioSettings {
     private float musicVolume;
     private float soundVolume;
 
     public AudioSettings() {
-        musicVolume = 1;
-        soundVolume = 1;
+        musicVolume = 0.8f;
+        soundVolume = 0.75f;
     }
 
     public float getMusicVolume() {
@@ -24,4 +26,6 @@ public class AudioSettings {
     public void setSoundVolume(float soundVolume) {
         this.soundVolume = soundVolume;
     }
+
+
 }
