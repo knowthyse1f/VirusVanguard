@@ -66,6 +66,7 @@ public class UISlider extends UIClickable{
         return sprite;
     }
 
+
     public double getValue() {
         return value;
     }
