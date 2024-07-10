@@ -15,6 +15,7 @@ public class Renderer {
         renderUI(state,graphics);
     }
 
+
     private void renderUI(State state, Graphics graphics) {
         state.getUiContainers().forEach(uiContainer -> graphics.drawImage(
                 uiContainer.getSprite(),
@@ -55,12 +56,14 @@ public class Renderer {
                 if(state.getGameSetting().getRenderSettings().getShouldRenderGrid().getValue()) {
 
 
+
                     graphics.setColor(Color.GRAY);
                     graphics.drawRect(
                             x * Game.SPRITE_SIZE - camera.getPosition().intX(),
                             y * Game.SPRITE_SIZE - camera.getPosition().intY(),
                             Game.SPRITE_SIZE,
                             Game.SPRITE_SIZE
+                            //Making rectangle grids into the editor option
 
                     );
                 }
