@@ -24,11 +24,16 @@ public class VerticalContainer extends UIContainer{
     @Override
     protected void calculateContentPosition() {
         int currentY = padding.getTop();
+        int currentX = padding.getLeft();
 
         for(UIComponents uiComponents : children){
+
+            if(centerChildren){
+                currentX = getSize().getWidth() / 2 - uiComponents.getSize().getWidth() / 2;
+            }
             currentY+=uiComponents.getMargin().getTop();
-            uiComponents.setRealtivePostion(new Position(padding.getLeft(),currentY));
-            uiComponents.setAbsulutePostion(new Position(padding.getLeft()+ absulutePostion.intX(),currentY+ absulutePostion.intY()));
+            uiComponents.setRealtivePostion(new Position(currentX,currentY));
+            uiComponents.setAbsulutePostion(new Position(currentX + absulutePostion.intX(),currentY+ absulutePostion.intY()));
             currentY+=uiComponents.getSize().getHeight();
             currentY+=uiComponents.getMargin().getBottom();
         }
