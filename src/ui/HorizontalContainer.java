@@ -24,11 +24,17 @@ public class HorizontalContainer extends UIContainer{
     @Override
     protected void calculateContentPosition() {
         int currentX = padding.getLeft();
+        int currentY = padding.getTop();
 
         for(UIComponents uiComponents : children){
+
+            if(centerChildren){
+                currentY = getSize().getHeight()/2 - uiComponents.getSize().getHeight()/2;
+            }
             currentX+=uiComponents.getMargin().getLeft();
-            uiComponents.setRealtivePostion(new Position(currentX,padding.getTop()));
-            uiComponents.setAbsulutePostion(new Position(currentX+absulutePostion.intX(),padding.getTop()+absulutePostion.intY()));
+
+            uiComponents.setRealtivePostion(new Position(currentX,currentY));
+            uiComponents.setAbsulutePostion(new Position(currentX+absulutePostion.intX(), currentY +absulutePostion.intY()));
             currentX+=uiComponents.getSize().getWidth();
             currentX+=uiComponents.getMargin().getRight();
         }
