@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class UICheckbox extends UIComponents {
 
-    //Making UICheckBox
+
     private UIContainer container;
 
     public UICheckbox(String label, Setting<Boolean>setting) {
