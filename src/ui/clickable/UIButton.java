@@ -2,6 +2,7 @@ package ui.clickable;
 
 import core.Size;
 import state.State;
+import ui.Spacing;
 import ui.UIContainer;
 import ui.UIText;
 import ui.VerticalContainer;
@@ -18,6 +19,8 @@ public class UIButton extends  UIClickable {
     public UIButton(String label,ClickAction clickEvent) {
         this.label= new UIText(label);
         this.clickAction = clickEvent;
+
+        setMargin(new Spacing(5,0,0,0));
 
         container= new VerticalContainer(new Size(0,0));
         container.setCenterChildren(true);
