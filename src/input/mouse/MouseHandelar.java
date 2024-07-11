@@ -1,15 +1,29 @@
 package input.mouse;
 
 import input.Input;
+import input.mouse.action.MouseAction;
 import state.State;
+import ui.UIImage;
+
+import java.util.Optional;
 
 public class MouseHandelar {
+
+    private MouseAction primaryButtonAction;
     private MouseConsumer activateConsumer;
     public void update(State state){
         final Input input =state.getInput();
 
+        handlePrimaryButton(state);
         handleActiveConsumer( state,input);
         cleanUp(input);
+    }
+
+    private void handlePrimaryButton(State state) {
+        if(primaryButtonAction!=null){
+            setActivateConsumer(primaryButtonAction);
+            primaryButtonAction.Update(state);
+        }
     }
 
     private  void cleanUp(Input input) {
@@ -39,6 +53,18 @@ public class MouseHandelar {
             activateConsumer = mouseConsumer;
         }
 
+    }
+
+    public void setPrimaryButtonAction(MouseAction primaryButtonAction) {
+        this.primaryButtonAction = primaryButtonAction;
+    }
+
+    public Optional<UIImage> getPrimaryButtonUI(){
+        if(primaryButtonAction!=null){
+            return Optional.ofNullable(primaryButtonAction.getSprite());
+        }
+
+        return Optional.empty();
     }
 }
 

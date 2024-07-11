@@ -9,7 +9,10 @@ public class Tile {
     private Image sprite;
 
     public Tile(SpriteLibrary spriteLibrary) {
-        this.sprite = spriteLibrary.getImage("wdfloor");
+        this(spriteLibrary, "wdfloor");
+    }
+    public Tile(SpriteLibrary spriteLibrary, String tileName) {
+        this.sprite = spriteLibrary.getImage(tileName);
     }
 
     public Image getSprite() {
