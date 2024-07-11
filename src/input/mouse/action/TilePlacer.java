@@ -1,6 +1,8 @@
 package input.mouse.action;
 
 
+import core.Position;
+import game.Game;
 import map.Tile;
 import state.State;
 import ui.UIImage;
@@ -19,7 +21,16 @@ public class TilePlacer extends MouseAction{
 
     @Override
     public void Update(State state) {
-         preview.setAbsulutePostion(state.getInput().getMousePosition());
+        Position position = Position.CopyOf(state.getInput().getMousePosition());
+        position.add(state.getCamera().getPosition());
+
+        gridX = position.intX() / Game.SPRITE_SIZE;
+        gridY = position.intY() / Game.SPRITE_SIZE;
+
+        position.subtract(new Position(position.intX() % Game.SPRITE_SIZE, position.intY() % Game.SPRITE_SIZE));
+        position.subtract(state.getCamera().getPosition());
+
+        preview.setAbsulutePostion(position);
     }
 
     @Override
@@ -30,8 +41,10 @@ public class TilePlacer extends MouseAction{
     public void onClick(State state) {}
 
     @Override
-    public void onDrag(State state) {
-
+    public void onDrag(State state){
+        if(state.getGameMap().gridWithinBounds(gridX, gridY)){
+            state.getGameMap().setTile(gridX, gridY, Tile.copyOf(tile));
+        }
     }
 
 }
