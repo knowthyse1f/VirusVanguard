@@ -10,6 +10,7 @@ import game.Time;
 import game.setting.GameSetting;
 import gfx.SpriteLibrary;
 import input.Input;
+import input.mouse.MouseHandelar;
 import map.GameMap;
 import ui.UIContainer;
 
@@ -29,6 +30,8 @@ public abstract class State {
     protected Input input;
     protected Camera camera;
     protected Time time;
+    protected MouseHandelar mouseHandelar;
+
     protected Size windowSize;
     private State nextState;
 
@@ -40,6 +43,7 @@ public abstract class State {
         spriteLibrary= new SpriteLibrary();
         gameObjects=new ArrayList<>();
         uiContainers=new ArrayList<>();
+        mouseHandelar=new MouseHandelar();
         camera=new Camera(windowSize);
         time=new Time();
     }
@@ -50,18 +54,14 @@ public abstract class State {
         updateGameObjects();
         List.copyOf(uiContainers).forEach(uiContainer -> uiContainer.Update(this));
         camera.update(this);
-        handleMouseInput();
+        mouseHandelar.update(this);
+
         if(nextState !=null){
             game.enterState(nextState);
         }
     }
 
-    private void handleMouseInput() {
-        if(input.isMouseClicked()){
-            System.out.println(String.format("MOUSE CLICKED AT POSITION x : %.0f  y: %.0f ", input.getMousePosition().getX(),input.getMousePosition().getY()));
-        }
-        input.clearMouseClicke();
-    }
+
 
     private void updateGameObjects() {
 
@@ -141,4 +141,7 @@ public abstract class State {
         audioPlayer.clear();
     }
 
+    public MouseHandelar getMouseHandelar() {
+        return mouseHandelar;
+    }
 }

@@ -29,15 +29,14 @@ public class UISlider extends UIClickable{
     }
 
     @Override
-    protected void onDrag(State state) {
+    public void onDrag(State state) {
         this.value = getValueAt(state.getInput().getMousePosition().getX());
+        this.value=Math.min(max,this.value);
+        this.value=Math.max(min,this.value);
     }
 
     @Override
-    protected void onClick(State state) {
-        this.value = getValueAt(state.getInput().getMousePosition().getX());
-
-    }
+    public void onClick(State state) {}
 
     private double getValueAt(double xPosition) {
         double positionOnSlider = xPosition - absulutePostion.getX();
