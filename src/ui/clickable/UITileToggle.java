@@ -17,7 +17,7 @@ public class UITileToggle extends UIClickable{
     private boolean active;
 
     public UITileToggle(Tile tile) {
-        image = new UIImage(tile.getSprite());
+        image = new UIImage(tile.getSprite().getScaledInstance(32,32,Image.SCALE_AREA_AVERAGING));
         tilePlacer = new TilePlacer(tile);
         size = image.getSize();
         generateActiveSprite();

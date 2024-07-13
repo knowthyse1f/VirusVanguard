@@ -1,29 +1,61 @@
 package map;
 
+import game.Game;
 import gfx.SpriteLibrary;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Tile {
 
+    private Image image;
     private Image sprite;
+    private int tileIndex;
+
 
     public Tile(SpriteLibrary spriteLibrary) {
-        this(spriteLibrary, "wdfloor");
+        this(spriteLibrary, "grass");
     }
     public Tile(SpriteLibrary spriteLibrary, String tileName) {
-        this.sprite = spriteLibrary.getImage(tileName);
+        this.image = spriteLibrary.getImage(tileName);
+        generateSprite();
     }
 
-    private Tile(Image sprite){
-        this.sprite = sprite;
+    private Tile(Image image, int tileIndex){
+        this.image = image;
+        this.tileIndex = tileIndex;
+        generateSprite();
     }
+
+    private void generateSprite() {
+        sprite = ((BufferedImage)image).getSubimage(
+                (tileIndex / (image.getWidth(null) / Game.SPRITE_SIZE)) * Game.SPRITE_SIZE,
+                (tileIndex % (image.getWidth(null) / Game.SPRITE_SIZE)) * Game.SPRITE_SIZE,
+                Game.SPRITE_SIZE,
+                Game.SPRITE_SIZE
+        );
+    }
+
+
 
     public static Tile copyOf(Tile tile) {
-        return new Tile(tile.getSprite());
+        return new Tile(tile.getImage(), tile.getTileIndex());
+    }
+
+    public int getTileIndex() {
+        return tileIndex;
+    }
+
+    public void setTileIndex(int tileIndex) {
+        this.tileIndex = tileIndex;
+        generateSprite();
     }
 
     public Image getSprite() {
         return sprite;
+    }
+
+    public Image getImage() {
+        return image;
     }
 }

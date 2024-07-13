@@ -57,7 +57,7 @@ public class UIMinimap extends UIClickable{
         for(int x = 0; x < gameMap.getTiles().length; x++){
             for(int y = 0; y < gameMap.getTiles()[0].length; y++){
                 graphics.drawImage(
-                        gameMap.getTiles()[x][y].getSprite().getScaledInstance(pixelsPerGrid, pixelsPerGrid, 0),
+                        gameMap.getTiles()[x][y].getSprite().getScaledInstance(pixelsPerGrid, pixelsPerGrid, Image.SCALE_AREA_AVERAGING),
                         x * pixelsPerGrid + pixelOffSet.intX(),
                         y * pixelsPerGrid + pixelOffSet.intY(),
                         null
