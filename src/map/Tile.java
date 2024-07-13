@@ -5,12 +5,14 @@ import gfx.SpriteLibrary;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
-public class Tile {
+public class Tile implements Serializable {
 
-    private Image image;
-    private Image sprite;
+    private transient Image image;
+    private transient Image sprite;
     private int tileIndex;
+    private String tileName;
 
 
     public Tile(SpriteLibrary spriteLibrary) {
@@ -18,12 +20,14 @@ public class Tile {
     }
     public Tile(SpriteLibrary spriteLibrary, String tileName) {
         this.image = spriteLibrary.getImage(tileName);
+        this.tileName = tileName;
         generateSprite();
     }
 
-    private Tile(Image image, int tileIndex){
+    private Tile(Image image, int tileIndex, String tileName){
         this.image = image;
         this.tileIndex = tileIndex;
+        this.tileName = tileName;
         generateSprite();
     }
 
@@ -39,7 +43,7 @@ public class Tile {
 
 
     public static Tile copyOf(Tile tile) {
-        return new Tile(tile.getImage(), tile.getTileIndex());
+        return new Tile(tile.getImage(), tile.getTileIndex(), tile.getTileName());
     }
 
     public int getTileIndex() {
@@ -58,4 +62,14 @@ public class Tile {
     public Image getImage() {
         return image;
     }
+
+    public String getTileName() {
+        return tileName;
+    }
+
+    public void reloadGraphics(SpriteLibrary spriteLibrary){
+        image = spriteLibrary.getImage(tileName);
+        generateSprite();
+    }
 }
+

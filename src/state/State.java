@@ -12,6 +12,7 @@ import gfx.SpriteLibrary;
 import input.Input;
 import input.mouse.MouseHandelar;
 import map.GameMap;
+import map.MapIO;
 import ui.UIContainer;
 
 import java.util.ArrayList;
@@ -143,5 +144,9 @@ public abstract class State {
 
     public MouseHandelar getMouseHandelar() {
         return mouseHandelar;
+    }
+
+    public void loadGameMap() {
+        gameMap = MapIO.load(spriteLibrary);
     }
 }
