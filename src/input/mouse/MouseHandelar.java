@@ -66,5 +66,9 @@ public class MouseHandelar {
 
         return Optional.empty();
     }
+
+    public MouseAction getPrimaryButtonAction() {
+        return primaryButtonAction;
+    }
 }
 
