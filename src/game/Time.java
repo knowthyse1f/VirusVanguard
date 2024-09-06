@@ -32,4 +32,8 @@ public class Time {
     public boolean secondsDividableBy(double seconds) {
         return updatedsSinceStart % getUpdatesFromSeconds(seconds) == 0;
     }
+
+    public int getUpdatedsSinceStart() {
+        return updatedsSinceStart;
+    }
 }

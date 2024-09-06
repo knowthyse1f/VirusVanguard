@@ -1,7 +1,5 @@
 package game;
 
-import game.Game;
-
 public class GameLoop implements  Runnable{
 
     public  static final int UPDATES_PER_SECOND=60;
